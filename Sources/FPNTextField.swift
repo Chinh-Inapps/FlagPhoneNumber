@@ -35,6 +35,7 @@ open class FPNTextField: UITextField {
 	private var formatter: NBAsYouTypeFormatter?
 
 	open var flagButton: UIButton = UIButton()
+    open var spacingLeftViewToTextInput: CGFloat = 0
 
 	open override var font: UIFont? {
 		didSet {
@@ -150,10 +151,19 @@ open class FPNTextField: UITextField {
 
 		NSLayoutConstraint(item: flagButton, attribute: .centerY, relatedBy: .equal, toItem: leftView, attribute: .centerY, multiplier: 1, constant: 0).isActive = true
 
-		NSLayoutConstraint(item: flagButton, attribute: .leading, relatedBy: .equal, toItem: leftView, attribute: .leading, multiplier: 1, constant: 0).isActive = true
-		NSLayoutConstraint(item: phoneCodeTextField, attribute: .leading, relatedBy: .equal, toItem: flagButton, attribute: .trailing, multiplier: 1, constant: 0).isActive = true
+//        NSLayoutConstraint(item: phoneCodeTextField, attribute: .trailing, relatedBy: .equal, toItem: leftView, attribute: .trailing, multiplier: 1, constant: 0).isActive = true
+        
+//		NSLayoutConstraint(item: flagButton, attribute: .leading, relatedBy: .equal, toItem: leftView, attribute: .leading, multiplier: 1, constant: 0).isActive = true
+        
+        
+        NSLayoutConstraint(item: phoneCodeTextField, attribute: .leading, relatedBy: .equal, toItem: leftView, attribute: .leading, multiplier: 1, constant: 0).isActive = true
+        
+        NSLayoutConstraint(item: phoneCodeTextField, attribute: .trailing, relatedBy: .equal, toItem: flagButton, attribute: .leading, multiplier: 1, constant: 0).isActive = true
+        
 		NSLayoutConstraint(item: phoneCodeTextField, attribute: .trailing, relatedBy: .equal, toItem: leftView, attribute: .trailing, multiplier: 1, constant: 0).isActive = true
+        
 		NSLayoutConstraint(item: phoneCodeTextField, attribute: .top, relatedBy: .equal, toItem: leftView, attribute: .top, multiplier: 1, constant: 0).isActive = true
+        
 		NSLayoutConstraint(item: phoneCodeTextField, attribute: .bottom, relatedBy: .equal, toItem: leftView, attribute: .bottom, multiplier: 1, constant: 0).isActive = true
 	}
 
@@ -166,7 +176,7 @@ open class FPNTextField: UITextField {
 
 	open override func leftViewRect(forBounds bounds: CGRect) -> CGRect {
 		let size = leftViewSize
-		let width: CGFloat = min(bounds.size.width, size.width)
+		let width: CGFloat = min(bounds.size.width, size.width) + spacingLeftViewToTextInput
 		let height: CGFloat = min(bounds.size.height, size.height)
 		let newRect: CGRect = CGRect(x: bounds.minX, y: bounds.minY, width: width, height: height)
 
